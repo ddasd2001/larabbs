@@ -38,41 +38,50 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                            <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="30px" height="30px">
+                {{-- 消息通知标记 --}}
+                <li>
+                    <a href="{{ route('notifications.index') }}" class="notifications-badge" style="margin-top: -2px;">
+                        <span class="badge badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'fade' }} " title="消息提醒">
+                            {{ Auth::user()->notification_count }}
                         </span>
-                        {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="{{ route('users.show', Auth::id()) }}">
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                个人中心
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('users.edit', Auth::id()) }}">
-                                编辑资料
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            退出登录
+                </li>
+                <li class="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
+                                <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="30px" height="30px">
+                            </span>
+                            {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            @endguest
-        </ul>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ route('users.show', Auth::id()) }}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    个人中心
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.edit', Auth::id()) }}">
+                                    编辑资料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                退出登录
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                @endguest
+            </ul>
+        </div>
     </div>
-</div>
 </nav>
