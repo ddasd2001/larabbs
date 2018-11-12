@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Horizon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
 
         //
          \Carbon\Carbon::setLocale('zh');
+         Horizon::auth(function ($request) {
+            // return true / false;
+              return true;
+        });
     }
 
     /**
