@@ -35,11 +35,6 @@ class SeedCategoriesData extends Migration
         DB::table('categories')->insert($categories);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         DB::table('categories')->truncate();
