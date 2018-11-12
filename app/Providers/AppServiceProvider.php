@@ -13,17 +13,17 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-	{
-		\App\Models\User::observe(\App\Observers\UserObserver::class);
-		\App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
-		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
+    {
+      \App\Models\User::observe(\App\Observers\UserObserver::class);
+      \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
+      \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
 
         //
-         \Carbon\Carbon::setLocale('zh');
-         Horizon::auth(function ($request) {
+      \Carbon\Carbon::setLocale('zh');
+      Horizon::auth(function ($request) {
             // return true / false;
-              return true;
-        });
+          return true;
+      });
     }
 
     /**
@@ -33,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // if (app()->isLocal()) {
+        //     $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+        // }
+       if (config('app.debug')) {
+            $this->app->register('VIACreative\SudoSu\ServiceProvider');
+        }
     }
 }
