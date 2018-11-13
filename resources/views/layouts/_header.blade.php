@@ -56,32 +56,40 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ route('users.show', Auth::id()) }}">
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                    个人中心
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('users.edit', Auth::id()) }}">
-                                    编辑资料
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                退出登录
+                          @can('manage_contents')
+                          <li>
+                            <a href="{{ url(config('administrator.uri')) }}">
+                                <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+                                管理后台
                             </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
                         </li>
-                    </ul>
-                </li>
-                @endguest
-            </ul>
-        </div>
+                        @endcan
+                        <li>
+                            <a href="{{ route('users.show', Auth::id()) }}">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                个人中心
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('users.edit', Auth::id()) }}">
+                                编辑资料
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            退出登录
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @endguest
+        </ul>
     </div>
+</div>
 </nav>
