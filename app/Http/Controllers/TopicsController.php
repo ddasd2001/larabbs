@@ -11,6 +11,7 @@ use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\User;
 use App\Models\Link;
+use Illuminate\Support\Facades\Redis;
 
 class TopicsController extends Controller
 {
@@ -21,7 +22,7 @@ class TopicsController extends Controller
 
 	public function index(Request $request, Topic $topic, User $user, Link $link)
 	{
-		$topics = $topic->withOrder($request->order)->paginate(20);
+        $topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
 
